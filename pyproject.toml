@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rlec"
+version = "0.2.0"
+description = "RNA-Ligand Extended Connectivity (RLEC) Fingerprint for binding affinity prediction"
+authors = [{ name = "Stalin A", email = "stalin.bioinfo@gmail.com" }]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+keywords = ["RNA", "ligand", "fingerprint", "binding affinity", "cheminformatics", "bioinformatics"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Scientific/Engineering :: Chemistry",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "scipy>=1.10",
+    "scikit-learn>=1.3",
+    "rdkit>=2023.9",
+    "biopython>=1.81",
+    "tqdm>=4.65",
+    "joblib>=1.2",
+    "requests>=2.31",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov", "black", "ruff", "build", "twine"]
+viz = ["matplotlib>=3.7", "seaborn>=0.12"]
+
+[project.scripts]
+rlec = "rlec.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/stalinA/rlec"
+Documentation = "https://rlec.readthedocs.io"
+"Bug Tracker" = "https://github.com/stalinA/rlec/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["rlec*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100

@@ -24,7 +24,7 @@ Usage:
     pipe = Pipeline([("fp", RLECTransformer(n_jobs=-1)), ("model", ...)])
 """
 
-__version__ = "0.3.1"
+__version__ = "0.3.2"
 __author__ = "Stalin A"
 __email__ = "stalin.bioinfo@gmail.com"
 

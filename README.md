@@ -1,5 +1,11 @@
 # RLEC — RNA-Ligand Extended Connectivity Fingerprint
 
+[![PyPI version](https://img.shields.io/pypi/v/rlec.svg)](https://pypi.org/project/rlec/)
+[![Python versions](https://img.shields.io/pypi/pyversions/rlec.svg)](https://pypi.org/project/rlec/)
+[![PyPI downloads](https://img.shields.io/pypi/dm/rlec.svg)](https://pypi.org/project/rlec/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub stars](https://img.shields.io/github/stars/precisionmatics/rlec.svg?style=social)](https://github.com/precisionmatics/rlec)
+
 RLEC adapts the PLEC fingerprint (Wójcikowski et al., *Bioinformatics* 2019) to RNA-ligand systems. For each RNA–ligand contact pair, it pairs the Morgan-style chemical environments of the RNA atom and the ligand atom across increasing depths and hashes the pairs into a count vector. A companion **physical interaction module** provides 29 physics-based descriptors that complement the fingerprint.
 
 ## Installation

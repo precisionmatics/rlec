@@ -6,6 +6,31 @@ Versions correspond to PyPI releases at https://pypi.org/project/rlec/
 
 ---
 
+## [0.3.0] — 2026-08-14
+
+### Added
+- **`rlec.physical` module** — 29 physics-based interaction features from an RNA-ligand complex:
+  - Electrostatic: Gasteiger-charge-weighted Coulomb sum at interface (all + r<4 Å)
+  - H-bond: N/O···N/O donor-acceptor pair count (r < 3.5 Å) + fraction of contacts
+  - Hydrophobic: C/S···C/S contact count (r < 4.5 Å) + fraction
+  - Ionic: RNA phosphate P···cationic ligand atom count (r < 5.0 Å)
+  - Aromatic π-stacking: aromatic ring atom pairs (r < 5.5 Å)
+  - Geometric: contact count, unique RNA atoms in contact, contact density, distance stats
+  - Ligand global: Gasteiger charge sum/std/max/min
+  - Ligand RDKit 2D: MW, TPSA, HBD, HBA, RotBonds, RingCount, AromaticRings
+- **`compute_physical_features(rna_pdb, lig_sdf, cutoff=6.0)`** — returns `(29,)` float32 array
+- **`compute_physical_batch(complexes, cutoff=6.0, n_jobs=1)`** — returns `(N, 29)` array
+- **`PHYSICAL_FEATURE_NAMES`** — list of 29 feature name strings
+- **CLI `rlec physical RNA.pdb LIG.sdf`** — prints all 29 feature name/value pairs;
+  `--output FILE.csv` or `--output FILE.npy` saves the vector; `--cutoff Å` adjustable
+- All three are exported from the top-level `rlec` namespace
+
+### Notes
+- Physical features complement the RLEC fingerprint: `np.concatenate([fp.transform(r,l), compute_physical_features(r,l)])` → (4125,) combined descriptor
+- Combining RLEC-4096 + physical(29) + LigECFP4(2048) on PDBbind NL2020 (n=143, 10-split 80/20): PCC=0.584, SPCC=0.558, RMSE=0.143, MAE=0.115 — beats RLaffinity baseline
+
+---
+
 ## [0.2.0] — 2026-08-14
 
 ### Added

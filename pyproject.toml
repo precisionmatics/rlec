@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rlec"
-version = "0.2.0"
+version = "0.3.0"
 description = "RNA-Ligand Extended Connectivity (RLEC) Fingerprint for binding affinity prediction"
 authors = [{ name = "Stalin A", email = "stalin.bioinfo@gmail.com" }]
 readme = "README.md"

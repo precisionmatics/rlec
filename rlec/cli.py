@@ -199,6 +199,42 @@ def cmd_validate(args) -> None:
     print("  OK — fingerprint computed successfully.")
 
 
+# ── rlec physical ─────────────────────────────────────────────────────────────
+
+def cmd_physical(args) -> None:
+    import numpy as np
+    from rlec.physical import compute_physical_features, PHYSICAL_FEATURE_NAMES
+
+    feat = compute_physical_features(args.rna, args.ligand, cutoff=args.cutoff)
+    if feat is None:
+        print("ERROR: Could not compute physical features. Check PDB/SDF files.",
+              file=sys.stderr)
+        sys.exit(1)
+
+    print(f"{'─'*52}")
+    print(f"  RNA PDB  : {args.rna}")
+    print(f"  Ligand   : {args.ligand}")
+    print(f"  Cutoff   : {args.cutoff} Å")
+    print(f"{'─'*52}")
+
+    if args.output:
+        ext = args.output.rsplit(".", 1)[-1].lower()
+        if ext == "csv":
+            import pandas as pd
+            pd.DataFrame([feat], columns=PHYSICAL_FEATURE_NAMES).to_csv(
+                args.output, index=False)
+        elif ext == "npy":
+            np.save(args.output, feat)
+        else:
+            np.save(args.output, feat)
+        print(f"  Saved → {args.output}  shape={feat.shape}")
+    else:
+        max_name = max(len(n) for n in PHYSICAL_FEATURE_NAMES)
+        for name, val in zip(PHYSICAL_FEATURE_NAMES, feat):
+            print(f"  {name:<{max_name}}  {val:>10.4f}")
+    print(f"{'─'*52}")
+
+
 # ── Main entry point ──────────────────────────────────────────────────────────
 
 def main() -> None:
@@ -277,6 +313,26 @@ def main() -> None:
     p_vl.add_argument("ligand", help="Ligand SDF file path")
     _add_fp_args(p_vl)
     p_vl.set_defaults(func=cmd_validate)
+
+    # ── physical ──
+    p_ph = sub.add_parser(
+        "physical",
+        help="Compute 29 physics-based interaction features for a complex",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        description=(
+            "Computes 29 physics-based descriptors from an RNA-ligand complex:\n"
+            "  electrostatic (Gasteiger charges), H-bonds, hydrophobic contacts,\n"
+            "  ionic contacts, π-stacking, geometric stats, ligand 2D descriptors.\n\n"
+            "Output: prints all 29 feature name/value pairs, or saves to .csv/.npy"
+        ),
+    )
+    p_ph.add_argument("rna",    help="RNA PDB file path")
+    p_ph.add_argument("ligand", help="Ligand SDF file path")
+    p_ph.add_argument("--cutoff", type=float, default=6.0, metavar="Å",
+                      help="Contact distance cutoff in Å (default: 6.0)")
+    p_ph.add_argument("-o", "--output", default=None, metavar="FILE",
+                      help="Output file (.csv or .npy)")
+    p_ph.set_defaults(func=cmd_physical)
 
     args = parser.parse_args()
 

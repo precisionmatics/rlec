@@ -6,6 +6,13 @@ Versions correspond to PyPI releases at https://pypi.org/project/rlec/
 
 ---
 
+## [0.3.1] — 2026-08-14
+
+### Fixed
+- README on PyPI now shows physical features, CLI commands, and updated benchmark table
+
+---
+
 ## [0.3.0] — 2026-08-14
 
 ### Added

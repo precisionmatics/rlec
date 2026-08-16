@@ -1,4 +1,4 @@
-# RLEC — RNA-Ligand Extended Connectivity Fingerprint
+# RLEC: RNA-Ligand Extended Connectivity Fingerprint
 
 [![PyPI version](https://img.shields.io/pypi/v/rlec.svg)](https://pypi.org/project/rlec/)
 [![Python versions](https://img.shields.io/pypi/pyversions/rlec.svg)](https://pypi.org/project/rlec/)
@@ -6,7 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/precisionmatics/rlec.svg?style=social)](https://github.com/precisionmatics/rlec)
 
-RLEC adapts the PLEC fingerprint (Wójcikowski et al., *Bioinformatics* 2019) to RNA-ligand systems. For each RNA–ligand contact pair, it pairs the Morgan-style chemical environments of the RNA atom and the ligand atom across increasing depths and hashes the pairs into a count vector. A companion **physical interaction module** provides 29 physics-based descriptors that complement the fingerprint.
+RLEC adapts the PLEC fingerprint (Wójcikowski et al., *Bioinformatics* 2019) to RNA-ligand systems. For each RNA-ligand contact pair, it pairs the Morgan-style chemical environments of the RNA atom and the ligand atom across increasing depths and hashes the pairs into a count vector. A companion **physical interaction module** provides 29 physics-based descriptors that complement the fingerprint.
 
 ## Installation
 
@@ -116,15 +116,15 @@ rlec batch data.csv --rna-col rna_path --lig-col lig_path -o feats.npz --n-jobs 
 | `feat_set` | RNA atom invariant |
 |---|---|
 | 0 | Basic ECFP (atomic num, charge, degree, aromaticity, ring) |
-| 1 | + nucleotide type (A/U/G/C/T/modified) — **best** |
+| 1 | + nucleotide type (A/U/G/C/T/modified) **(recommended default)** |
 | 2 | + PBS group (Phosphate/Sugar/Base) |
 | 3 | + nucleotide type + PBS group |
 
 ## Performance
 
-Validated on 143 RNA–ligand complexes from PDBbind NL2020.
+Validated on 143 RNA-ligand complexes from PDBbind NL2020.
 
-**LOOCV (LightGBM) — fingerprint quality:**
+**LOOCV (LightGBM), fingerprint quality:**
 
 | Method | LOOCV r |
 |---|---|
@@ -135,7 +135,7 @@ Validated on 143 RNA–ligand complexes from PDBbind NL2020.
 
 95% bootstrap CI: [0.616, 0.790]. RLEC vs ligand-only: Δr = +0.148 (p < 0.0005).
 
-**10-split 80/20 benchmark (XGBoost) — comparable to published methods:**
+**10-split 80/20 benchmark (LightGBM), same protocol as RLaffinity and Xia et al.:**
 
 | Method | PCC | SPCC | RMSE | MAE |
 |---|---|---|---|---|
@@ -156,7 +156,7 @@ RLEC + Physical (4125-D combined) outperforms RLaffinity on all four metrics.
 
 If you use RLEC, please cite:
 
-> Stalin A. *RLEC: RNA-Ligand Extended Connectivity Fingerprint for binding affinity prediction.* (2026)
+> Arulsamy S. *RLEC: an extended connectivity interaction fingerprint for RNA-ligand systems.* (2026). Available at: https://github.com/precisionmatics/rlec
 
 > Wójcikowski M, Kukiełka M, Stepniak-Konieczna M, Antosiewicz JM, Siedlecki P.
 > Development of a protein–ligand extended connectivity (PLEC) fingerprint and its

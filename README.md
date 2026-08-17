@@ -151,13 +151,3 @@ RLEC + Physical (4125-D combined) outperforms RLaffinity on all four metrics.
 
 - Python ≥ 3.9
 - numpy, scipy, biopython, rdkit, scikit-learn, pandas, tqdm, joblib
-
-## Citation
-
-If you use RLEC, please cite:
-
-> Arulsamy S. *RLEC: an extended connectivity interaction fingerprint for RNA-ligand systems.* (2026). Available at: https://github.com/precisionmatics/rlec
-
-> Wójcikowski M, Kukiełka M, Stepniak-Konieczna M, Antosiewicz JM, Siedlecki P.
-> Development of a protein–ligand extended connectivity (PLEC) fingerprint and its
-> application for virtual screening. *Bioinformatics* 2019;35(8):1334–1341.

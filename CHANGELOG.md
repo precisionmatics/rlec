@@ -147,9 +147,3 @@ for rna_atom, lig_atom in contacts(rna, ligand, cutoff=6.0 Å):
         bits.append(hash((r_h, l_h)) & 0xFFFFFFFF)
 fingerprint = count_fold(bits, fp_size=4096)
 ```
-
-**Reference:**
-Wójcikowski M, Kukiełka M, Stepniak-Konieczna M, Antosiewicz JM, Siedlecki P.
-Development of a protein-ligand extended connectivity (PLEC) fingerprint and its
-application for virtual screening.
-*Bioinformatics* 2019;35(8):1334-1341. https://doi.org/10.1093/bioinformatics/bty757
